@@ -4,7 +4,7 @@
   gather_facts: no
   connection: network_cli  # Use 'local' if using API modules
   vars:
-    ansible_network_os: arubaoss  # Change to 'ios', 'junos', etc. for your switch type
+    ansible_network_os: ios  # Change to 'ios', 'junos', etc. for your switch type
     ansible_user: "{{ lookup('env', 'SWITCH_USER') }}"
     ansible_password: "{{ lookup('env', 'SWITCH_PASS') }}"
     ansible_ssh_common_args: "-o StrictHostKeyChecking=no"
