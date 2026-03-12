@@ -1,0 +1,24 @@
+---
+- name: Ping a device from AWX using shell
+  hosts: 10.254.108.13
+  gather_facts: no
+  vars:
+    target_ip: "10.254.108.13"  # Change to the device IP or hostname
+    ping_count: 4              # Number of ICMP packets to send
+  tasks:
+    - name: Validate target_ip variable
+      ansible.builtin.assert:
+        that:
+          - target_ip is match("^[0-9a-zA-Z_.-]+$")
+        fail_msg: "Invalid target_ip format."
+
+    - name: Ping the target device
+      ansible.builtin.shell: |
+        ping -c {{ ping_count }} {{ target_ip }}
+      register: ping_result
+      changed_when: false
+      failed_when: ping_result.rc != 0
+
+    - name: Show ping output
+      ansible.builtin.debug:
+        var: ping_result.stdout
