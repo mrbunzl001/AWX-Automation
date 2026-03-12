@@ -1,6 +1,6 @@
 ---
 - name: Gather switch details
-  hosts: switches
+  hosts: 10.254.108.13
   gather_facts: no
   connection: network_cli  # Use 'local' if using API modules
   vars:
